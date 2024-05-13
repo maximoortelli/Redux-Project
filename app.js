@@ -29,27 +29,31 @@ const return_pokemon_action = (cant) => { // <-- Este es la accion de comprar un
 
 // Reducers = Los reducers ordenan el almacen.
 const default_games_state = {
-    pokemon: 10
+    pokemon: 10,
+    yoshi: 10 // <- 10 unidades de yoshi.
 }
 
+// games_reducer tiene un estado
 const games_reducer = (state = default_games_state, action) => {
     switch(action.type){
         case BUY_POKEMON: {
             return {
+                ...state, // Devolvemos el estado anterior y hacemos la modificacion pertinente
                 pokemon: state.pokemon - action.payload
             }
         }
         case RETURN_POKEMON: {
             return {
+                ...state, // Devolvemos el estado anterior y hacemos la modificacion pertinente
                 pokemon: state.pokemon + action.payload
             }
         }
         default: return state;
-    }
+    } 
 }
 
 // Store = caja que almacena los Almacen de nuestra tienda.
-let store = createStore(games_reducer);
+const store = createStore(games_reducer);
 //store.getState() devuelve el estado inicial
 console.log('Estado Inicial:', store.getState());
 
